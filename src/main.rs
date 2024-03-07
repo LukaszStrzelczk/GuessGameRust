@@ -1,7 +1,8 @@
 //to input from console
-use std::io;
+use std::{cmp::Ordering, io};
 //for randomization
 use rand::Rng;
+
 
 fn main() {
     println!("Guess the number!");
@@ -18,5 +19,12 @@ fn main() {
     io::stdin()
         .read_line(&mut guess)
         .expect("failed to read line");
-    println!("{guess}");
+    
+    let guess: i32=guess.trim().parse().expect("please type a number!");
+
+    match guess.cmp(&secret_guess){
+        Ordering::Less => println!("too small"),
+        Ordering::Greater=> println!("too big"),
+        Ordering::Equal=> println!("you won!"),
+    }
 }
